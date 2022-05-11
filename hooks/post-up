@@ -1,0 +1,61 @@
+#!/bin/sh
+
+touch "$HOME"/.psqlrc.local
+
+# neovim plugins update
+if [ -e "$HOME"/.local/share/nvim/site/autoload/plug.vim ]; then
+  nvim -E -s +PlugUpgrade +qa
+else
+  curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+fi
+
+if [ -e "$HOME"/.config/nvim/plug.vim ]; then
+  nvim -u "$HOME"/.config/nvim/plug.vim +PlugUpdate +PlugClean! +qa
+fi
+
+# vim plugins update
+if [ -e "$HOME"/.vim/autoload/plug.vim ]; then
+  vim -E -s +PlugUpgrade +qa
+else
+  curl -fLo "$HOME"/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+fi
+
+if [ -e "$HOME"/.vimrc.bundles ]; then
+  vim -u "$HOME"/.vimrc.bundles +PlugUpdate +PlugClean! +qa
+fi
+
+# detect tmp usage in tmux conf and install+update plugins
+if grep -Fxq 'run "~/.tmux/plugins/tpm/tpm"' ~/.tmux.conf; then
+  if [ ! -e "$HOME"/.tmux/plugins/tpm ]; then
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+  fi
+  "$HOME"/.tmux/plugins/tpm/bin/install_plugins
+  "$HOME"/.tmux/plugins/tpm/bin/update_plugins all
+  "$HOME"/.tmux/plugins/tpm/bin/clean_plugins
+fi
+
+reset -Q
+
+#
+if [ -f "$HOME/.git_template/HEAD" ] && \
+  [ "$(cat "$HOME/.git_template/HEAD")" = "ref: refs/heads/main" ]; then
+  echo "Removing ~/.git_template/HEAD in favor of defaultBranch" >&2
+  rm -f ~/.git_template/HEAD
+fi
+
+# detect old OS X broken /etc/zshenv and suggest rename
+if grep -qw path_helper /etc/zshenv 2>/dev/null; then
+  dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd -P)
+
+  cat <<MSG >&2
+Warning: \`/etc/zshenv' configuration file on your system may cause unexpected
+PATH changes on subsequent invocations of the zsh shell. The solution is to
+rename the file to \`zprofile':
+  sudo mv /etc/{zshenv,zprofile}
+
+(called from ${dir}/post-up:${LINENO})
+
+MSG
+fi
