@@ -1,5 +1,4 @@
 " Fundamentals "{{{
-" ---------------------------------------------------------------------
 
 " init autocmd
 autocmd!
@@ -35,7 +34,7 @@ endif
 " Suppress appending <PasteStart> and <PasteEnd> when pasting
 set t_BE=
 
-set nosc noru nosm
+" set nosc noru nosm
 " Don't redraw while executing macros (good performance config)
 set lazyredraw
 "set showmatch
@@ -66,7 +65,7 @@ set formatoptions+=r
 "}}}
 
 " Highlights "{{{
-" ---------------------------------------------------------------------
+
 set cursorline
 "set cursorcolumn
 
@@ -89,7 +88,7 @@ endif
 "}}}
 
 " File types "{{{
-" ---------------------------------------------------------------------
+
 " JavaScript
 au BufNewFile,BufRead *.es6 setf javascript
 " TypeScript
@@ -111,26 +110,26 @@ autocmd FileType yaml setlocal shiftwidth=2 tabstop=2
 "}}}
 
 " Imports "{{{
-" ---------------------------------------------------------------------
+
 runtime ./plug.vim
+
 if has("unix")
   let s:uname = system("uname -s")
-  " Do Mac stuff
   if s:uname == "Darwin\n"
     runtime ./macos.vim
   endif
 endif
+
 if has('win32')
   runtime ./windows.vim
 endif
 
 runtime ./maps.vim
+
 "}}}
 
 " Syntax theme "{{{
-" ---------------------------------------------------------------------
 
-" true color
 if exists("&termguicolors") && exists("&winblend")
   syntax enable
   set termguicolors
@@ -140,12 +139,6 @@ if exists("&termguicolors") && exists("&winblend")
 
   set background=dark
   " set background=light
-
-  " Use NeoSolarized
-  " let g:neosolarized_termtrans=1
-  " let g:neosolarized_bold = 1
-  " let g:neosolarized_underline = 1
-  " let g:neosolarized_italic = 1
 
   " let g:everforest_background = 'hard'
   let g:everforest_transparent_background = 1
@@ -158,8 +151,7 @@ endif
 "}}}
 
 " Extras "{{{
-" ---------------------------------------------------------------------
-set exrc
-"}}}
 
-" vim: set foldmethod=marker foldlevel=0:
+" set exrc
+
+"}}}

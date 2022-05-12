@@ -33,9 +33,7 @@ endif
 Plug 'groenewege/vim-less', { 'for': 'less' }
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'vim-scripts/tComment'
-" Plug 'overcache/NeoSolarized'
 Plug 'sainnhe/everforest'
-" Plug 'chrisbra/Colorizer'
 
 call plug#end()
 
