@@ -3,6 +3,9 @@ if !exists('g:loaded_cmp') | finish | endif
 set completeopt=menuone,noinsert,noselect
 
 lua <<EOF
+  require("luasnip.loaders.from_vscode").lazy_load()
+  require'luasnip'.filetype_extend("ruby", {"rails"})
+
   local cmp = require'cmp'
   local lspkind = require'lspkind'
 
@@ -26,6 +29,8 @@ lua <<EOF
       { name = 'nvim_lsp' },
     }, {
       { name = 'buffer' },
+    }, {
+      { name = 'luasnip' },
     }),
     formatting = {
       format = lspkind.cmp_format({with_text = false, maxwidth = 50})

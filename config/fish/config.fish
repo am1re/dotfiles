@@ -12,9 +12,13 @@ set -gx PATH ~/.local/bin $PATH
 set -gx PATH ~/Library/Python/3.9/bin $PATH
 
 # Ruby
-set -gx PATH /opt/homebrew/opt/ruby/bin $PATH
+# set -gx PATH /opt/homebrew/opt/ruby/bin $PATH
 
 set -gx PATH /opt/homebrew/opt/grep/libexec/gnubin $PATH
+
+# Rbenv
+# set -Ux fish_user_paths $HOME/.rbenv/bin $fish_user_paths
+status --is-interactive; and rbenv init - fish | source
 
 # theme
 set -g theme_color_scheme 'Tomorrow Night'

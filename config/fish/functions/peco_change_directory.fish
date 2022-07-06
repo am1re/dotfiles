@@ -15,9 +15,11 @@ end
 
 function peco_change_directory
   begin
-    echo $HOME/.config
-    ghq list -p
-    ls -ad */|perl -pe "s#^#$PWD/#"|grep -v \.git
-    ls -ad $HOME/Developments/*/* |grep -v \.git
+    # echo $HOME/.config
+    # ghq list -p
+    echo '../'
+    tree -d -i -L 1 --gitignore --noreport
+    # ls -ad */|perl -pe "s#^#$PWD/#"|grep -v \.git
+    # ls -ad $HOME/Documents/Code/*/* |grep -v \.git
   end | sed -e 's/\/$//' | awk '!a[$0]++' | _peco_change_directory $argv
 end

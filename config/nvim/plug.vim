@@ -4,35 +4,51 @@ endif
 
 call plug#begin()
 
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rhubarb'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'tpope/vim-commentary'
+Plug 'andymass/vim-matchup'
 
 if has("nvim")
-  Plug 'hoob3rt/lualine.nvim'
-  Plug 'kristijanhusak/defx-git'
-  Plug 'kristijanhusak/defx-icons'
-  Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'neovim/nvim-lspconfig'
+
+  " lsp
   Plug 'williamboman/nvim-lsp-installer'
-  Plug 'tami5/lspsaga.nvim'
-  Plug 'folke/lsp-colors.nvim'
-  Plug 'L3MON4D3/LuaSnip'
-  Plug 'hrsh7th/cmp-nvim-lsp'
-  Plug 'hrsh7th/cmp-buffer'
-  Plug 'hrsh7th/nvim-cmp'
+  Plug 'neovim/nvim-lspconfig'
+  " Plug 'glepnir/lspsaga.nvim'
+  " Plug 'glepnir/lspsaga.nvim', { 'branch': 'main' }
+  Plug 'glepnir/lspsaga.nvim', {'frozen': 1}
+
+  " syntax highlight, indent, fold, autotag + vim-matchup integration
   Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
-  Plug 'kyazdani42/nvim-web-devicons'
-  Plug 'onsails/lspkind-nvim'
-  Plug 'nvim-lua/popup.nvim'
-  Plug 'nvim-lua/plenary.nvim'
-  Plug 'nvim-telescope/telescope.nvim'
   Plug 'windwp/nvim-autopairs'
-  Plug 'windwp/nvim-ts-autotag'
+  " Plug 'windwp/nvim-ts-autotag' " autotag, use instead of let g:matchup_transmute_enabled = 1
+
+  " completion setup
+  Plug 'hrsh7th/nvim-cmp' " completion plugin 
+  Plug 'onsails/lspkind-nvim' " icons
+
+  Plug 'hrsh7th/cmp-nvim-lsp' " lsp source
+  Plug 'hrsh7th/cmp-buffer' " buffer source
+  Plug 'saadparwaiz1/cmp_luasnip' " snippets source
+
+  Plug 'L3MON4D3/LuaSnip' " snippets plugin
+  Plug 'rafamadriz/friendly-snippets' " snippets collection
+
+  " telescope
+  Plug 'nvim-lua/plenary.nvim' " library for telescope
+  Plug 'nvim-telescope/telescope.nvim'
+
+  " bottom bar
+  Plug 'hoob3rt/lualine.nvim'
+  Plug 'kyazdani42/nvim-web-devicons'
+
 endif
 
-Plug 'groenewege/vim-less', { 'for': 'less' }
-Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
-Plug 'vim-scripts/tComment'
+" file browser
+Plug 'lambdalisue/fern.vim'
+Plug 'lambdalisue/fern-git-status.vim'
+Plug 'yuki-yano/fern-preview.vim'
+
+" theme
 Plug 'sainnhe/everforest'
 
 call plug#end()

@@ -13,6 +13,9 @@ fish shell theme
 tmux theme
 vim theme
 
+defaults write -g InitialKeyRepeat -int 10 # normal minimum is 15 (225 ms)
+defaults write -g KeyRepeat -int 1 # normal minimum is 2 (30 ms)
+
 inspiration 
 * https://github.com/craftzdog/dotfiles-public
 * https://github.com/thoughtbot/dotfiles
